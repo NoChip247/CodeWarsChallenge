@@ -10,3 +10,17 @@ Please list people which have 'first_name' with at least 6 character long
 **results table schema**
 - first_name
 - last_name
+
+---
+
+### Solution
+
+```sql
+SELECT 
+  first_name, 
+  last_name 
+FROM 
+  names 
+WHERE 
+  first_name LIKE '______%'
+```
