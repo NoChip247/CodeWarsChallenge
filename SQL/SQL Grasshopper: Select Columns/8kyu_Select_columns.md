@@ -9,3 +9,15 @@ Table Description for customers:
 | custname | string | 50 | Anakin | Skywalker |
 | custstate | string | 50 | Tatooine |
 | custard | string | 50 | R2-D2 |
+
+---
+
+### Solution
+
+```sql
+SELECT
+custid,
+custname,
+custstate
+FROM customers
+```
