@@ -6,3 +6,13 @@ Examples:
 - -34: 34
 
 You will be given a table `opposite`, with a column `number`. Return a table with a column `res`.
+
+---
+
+### Solution
+
+```sql
+SELECT
+number-(number*2) AS res
+FROM opposite
+```
