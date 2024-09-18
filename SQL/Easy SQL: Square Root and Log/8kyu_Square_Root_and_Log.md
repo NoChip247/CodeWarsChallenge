@@ -7,3 +7,14 @@ Given the following table 'decimals':
 
 Return a table with two columns (root, log) where the values in root are the square root of those provided in number1 and the values in log are changed to a base 10 logarithm from those in number2.
 
+---
+
+### Solution
+
+```sql
+
+select
+    SQRT(number1) AS "root",
+    LOG10(number2) AS "log"
+from decimals
+```
