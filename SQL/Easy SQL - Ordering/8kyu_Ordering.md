@@ -5,3 +5,13 @@ Your task is to sort the information in the provided table 'companies' by number
 - ceo
 - motto
 - employees
+
+---
+
+### Solution
+
+```sql
+select *
+from companies
+order by employees desc
+```
