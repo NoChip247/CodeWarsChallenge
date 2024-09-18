@@ -15,3 +15,13 @@ Examples
 ```
 
 In SQL, you will be given a table `years` with a column `yr` for the year. Return a table with a column `century`.
+
+---
+
+### Solution
+
+```sql
+select
+CEIL(yr / 100.0) AS century
+from years
+```
