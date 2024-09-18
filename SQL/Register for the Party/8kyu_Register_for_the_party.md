@@ -8,3 +8,13 @@ participants table schema
 NOTES:
 - Since alcohol will be served, you can only attend if you are 21 or older
 - You can't attend if the attending column returns anything but true
+
+---
+
+### Solution
+
+```sql
+INSERT INTO participants (name, age, attending)
+VALUES ('John', 25, true);
+SELECT * FROM participants
+```
