@@ -9,3 +9,11 @@ For this challenge you need to create a simple DISTINCT statement, you want to f
 - age (distinct)
 
 *NOTE: Your solution should use pure SQL. Ruby is used within the test cases to do the actual testing.*
+
+---
+
+### Solution
+
+```sql
+
+```
