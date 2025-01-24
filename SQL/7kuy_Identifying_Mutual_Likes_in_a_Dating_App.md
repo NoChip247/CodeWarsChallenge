@@ -4,7 +4,7 @@
 
 Imagine you are working for a dating app. Users of the app can "like" other users, and these interactions are stored in a database table called `user_likes`. The app's key feature is matching users when there is a mutual like, meaning both users have liked each other.
 
-#### user_likes Table Structure
+#### `user_likes` Table Structure
 - `id` (int): Primary key
 - `liker_id` (int): The ID of the user who sent the like.
 - `liked_id` (int): The ID of the user who received the like.
@@ -26,7 +26,7 @@ Additionally:
 
 ### Sample Data
 
-#### Input: user_likes Table
+#### Input: `user_likes` Table
 
 | liker_id  | liked_id |
 |-----------|----------|
