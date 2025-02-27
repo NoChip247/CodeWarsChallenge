@@ -2,7 +2,7 @@
 
 For this challenge, you will be using the DVD Rental database.
 
-![DVD rental database schema](https://neon.tech/postgresqltutorial/printable-postgresql-sample-database-diagram.pdf)
+![DVD rental database schema](assets/Capture d'écran 2025-02-27 090933.png)
 
 You are working for a company that wants to reward its top 10 customers with a free gift. You have been asked to generate a simple report that returns the top 10 customers by total amount spent, ordered from highest to lowest. The total number of payments has also been requested.
 
