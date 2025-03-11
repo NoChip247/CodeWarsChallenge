@@ -2,4 +2,4 @@
 
 C'est ici que je publie mes challenges codewars.com
 
-Cliquez sur le dossier SQL pour accéder aux différents challenges
+Cliquez sur le dossier SQL 👆 pour accéder aux différents challenges
