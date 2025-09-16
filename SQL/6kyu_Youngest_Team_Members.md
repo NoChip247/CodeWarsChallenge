@@ -74,3 +74,14 @@ Ce que fait la sous-requête utilisée :
 3. **ORDER BY birth_date DESC**
 - Les employés sont triés du plus jeune au plus âgé (car DESC = décroissant).
 - Donc, le plus jeune dans chaque équipe aura rn = 1.
+
+---
+
+Version encore plus simple qui permet de :
+- répondre au challenge
+- sans utiliser GROUP BY et MIN/MAX
+```sql
+SELECT DISTINCT ON (team) * 
+FROM employees
+ORDER BY team, birth_date DESC
+```
