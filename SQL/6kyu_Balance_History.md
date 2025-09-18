@@ -59,41 +59,23 @@ ORDER BY date ASC
 
 # Explications
 
-1) Contexte logique
-
-La requête d'origine fait un GROUP BY CAST(date AS DATE). Donc avant la fonction fenêtre, chaque date (sans l'heure) produit déjà une ligne agrégée.
-
-L'expression ci-dessus combine une agrégation de groupe (SUM(amount)) et une agrégation de fenêtre (le SUM(...) OVER (...)) pour obtenir un cumul des totaux journaliers.
-
-2) Décomposition étape par étape
-
-CAST(date AS DATE)
-
-Tronque la colonne date pour ne garder que la partie date (utile si date contient un timestamp).
-
+`CAST(date AS DATE)`  
+Tronque la colonne date pour ne garder que la partie date (utile si date contient un timestamp).  
 Permet de grouper par jour.
 
-SUM(amount) (l’agrégat interne)
-
-Calculé par groupe (ici : par jour) grâce au GROUP BY.
-
+`SUM(amount)` (l’agrégat interne)  
+Calculé par groupe (ici : par jour) grâce au GROUP BY.  
 Produit une colonne intermédiaire — appelons-la daily_total — qui vaut la somme des amount pour chaque date.
 
-SUM(SUM(amount)) avec OVER(...) (l’agrégat externe)
-
-Le SUM(...) OVER (...) est une fonction fenêtre. Elle prend la colonne daily_total (le résultat de l’agrégation de groupe) et calcule une somme cumulative sur les lignes résultantes du GROUP BY.
-
+`SUM(SUM(amount))` avec `OVER(...)` (l’agrégat externe)  
+Le `SUM(...) OVER (...)` est une fonction fenêtre. Elle prend la colonne daily_total (le résultat de l’agrégation de groupe) et calcule une somme cumulative sur les lignes résultantes du GROUP BY.  
 Autrement dit : pour chaque ligne (chaque date), elle additionne tous les daily_total depuis le début (ou depuis la borne définie) jusqu’à cette ligne.
 
-OVER (ORDER BY CAST(date AS DATE))
-
-Définit l’ordre dans lequel la fenêtre est parcourue — ici en ordre chronologique des dates.
-
-Par défaut (si tu n’ajoutes pas une clause ROWS/RANGE), la plupart des SGBD utilisent une frame de type UNBOUNDED PRECEDING … CURRENT ROW, ce qui produit bien un running total (cumul jusqu’à la date courante).
-
-Remarque pratique : si plusieurs lignes ont exactement la même valeur d’ORDER BY, le comportement des égalités dépend du frame (RANGE vs ROWS). Pour être déterministe avec des doublons, tu peux écrire explicitement :
-
-SUM(SUM(amount)) OVER (ORDER BY CAST(date AS DATE) ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+`OVER (ORDER BY CAST(date AS DATE))`  
+Définit l’ordre dans lequel la fenêtre est parcourue — ici en ordre chronologique des dates.  
+Par défaut (si tu n’ajoutes pas une clause ROWS/RANGE), la plupart des SGBD utilisent une frame de type UNBOUNDED PRECEDING … CURRENT ROW, ce qui produit bien un running total (cumul jusqu’à la date courante).  
+  
+Remarque pratique : si plusieurs lignes ont exactement la même valeur d’ORDER BY, le comportement des égalités dépend du frame (RANGE vs ROWS). Pour être déterministe avec des doublons, tu peux écrire explicitement : `SUM(SUM(amount)) OVER (ORDER BY CAST(date AS DATE) ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)`
 
 3) Ordre d’évaluation simplifié
 
