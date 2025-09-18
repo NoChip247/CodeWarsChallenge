@@ -1,0 +1,58 @@
+Let's consider a case where we have a students table and a courses table. The tables have the following structure:
+
+**students:**
+
+| id  | name     | email               |
+|-----|----------|---------------------|
+| 1   | John     | john@example.com    |
+| 2   | Sarah    | sarah@example.com   |
+| 3   | Robert   | robert@example.com  |
+...
+
+**courses:**
+
+| id  | student_id | course_name | score |
+|-----|------------|-------------|-------|
+| 1   | 1          | Math        | 90    |
+| 2   | 1          | Science     | 85    |
+| 3   | 2          | Math        | 92    |
+| 4   | 2          | Science     | 80    |
+...
+
+We need to find the students who have a higher score in Science than in Math.  
+
+Your SQL query should return the `student_id`, `name` (the name of the student), and his or her difference in scores between these courses (named as `score_difference`).  
+
+Order the result by the difference in scores in descending order, and if difference is the same, then by `student_id` in ascending order.  
+
+**Good Luck!**
+
+---
+
+### Desired Output
+
+The desired output should look like this:
+
+| student_id | name   | score_difference |
+|------------|--------|------------------|
+| 3          | Robert | 25               |
+| 5          | Emma   | 3                |
+| 6          | Olivia | 2                |
+| 10         | James  | 2                |
+
+---
+
+### Solution
+
+```sql
+SELECT
+  c.student_id,
+  s.name,
+  MAX(CASE WHEN course_name = 'Science' THEN score END) - MAX(CASE WHEN course_name = 'Math' THEN score END) AS score_difference # Ca donne (le plus haut score quand le cours est "Science") - (le plus haut score quand le cours est "Math")
+FROM students AS s
+LEFT JOIN courses AS c
+  ON s.id = c.student_id
+GROUP BY student_id, s.name
+HAVING MAX(CASE WHEN course_name = 'Science' THEN score END) - MAX(CASE WHEN course_name = 'Math' THEN score END) > 0
+ORDER BY score_difference DESC, student_id ASC
+```
